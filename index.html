@@ -1,147 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<style>
-    html, body {
-        width: 100%;
-        margin: 0;
-    }
 
-    html {
-        height: 100%;
-    }
-
-    body {
-        min-height: 100%;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    p {
-        word-break: break-all;
-    }
-
-    @media (max-width: 500px) {
-        h1 {
-            margin-top: 80px;
-        }
-    }
-
-    .flex {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .block {
-        display: block;
-        position: relative;
-    }
-
-    .url {
-        font-size: 18px;
-        padding: 10px 10px 10px 5px;
-        position: relative;
-        width: 300px;
-        border: none;
-        border-bottom: 1px solid #bfbfbf;
-    }
-
-    input:focus {
-        outline: none;
-    }
-
-    .bar {
-        content: '';
-        height: 2px;
-        width: 100%;
-        bottom: 0;
-        position: absolute;
-        background: #00bfb3;
-        transition: 0.2s ease transform;
-        -moz-transition: 0.2s ease transform;
-        -webkit-transition: 0.2s ease transform;
-        transform: scaleX(0);
-    }
-
-    .url:focus ~ .bar {
-        transform: scaleX(1);
-    }
-
-    .btn {
-        line-height: 38px;
-        background-color: #00bfb3;
-        color: #fff;
-        white-space: nowrap;
-        text-align: center;
-        font-size: 14px;
-        border: none;
-        border-radius: 2px;
-        cursor: pointer;
-        padding: 5px;
-        width: 160px;
-        margin: 30px 0;
-    }
-
-    .tips, .example {
-        color: #7b7b7b;
-        position: relative;
-        align-self: flex-start;
-        margin-left: 7.5em;
-    }
-
-    .tips > p:first-child::before {
-        position: absolute;
-        left: -3em;
-        content: 'PS：';
-        color: #7b7b7b
-    }
-
-    .example > p:first-child::before {
-        position: absolute;
-        left: -7.5em;
-        content: '合法输入示例：';
-        color: #7b7b7b
-    }
-</style>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script>
-        function toSubmit(e) {
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github文件加速</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            text-align: center;
+            padding-top: 100px;
+            height: 100vh;
+        }
+
+        #main {
+            margin-top: 50px;
+        }
+
+        .btn-black {
+            background-color: #000;
+            color: #fff;
+        }
+
+        #footer {
+            position: sticky;
+            top: calc(100% - 2.5em);
+            text-align: center;
+            width: 100%;
+            font-size: 10px;
+        }
+
+        #footer a {
+            color: #64696d;
+            text-decoration: underline;
+        }
+
+        .mt20 {
+            margin-top: 20px;
+        }
+
+        .tal {
+            text-align: left;
+        }
+    </style>
+    <script type="text/javascript">
+        function linkDownloadSubmit(e) {
             e.preventDefault()
-            window.open(location.href.substr(0, location.href.lastIndexOf('/') + 1) + document.getElementsByName('q')[0].value);
+            window.open('/' + document.getElementById("link").value);
             return false
         }
     </script>
-    <title>GitHub 文件加速</title>
 </head>
-<body class="flex">
-<a style="position: absolute;top: 0;right: 0;" href="https://github.com/hunshcn/gh-proxy"><img width="149" height="149" referrerPolicy="no-referrer"
-                                                                                               src="https://inews.gtimg.com/newsapp_ls/0/12025455907/0"
-                                                                                               alt="Fork me on GitHub"
-                                                                                               data-recalc-dims="1"></a>
-<h1 style="margin-bottom: 50px">GitHub 文件加速</h1>
-<form action="./" method="get" style="padding-bottom: 40px" target="_blank" class="flex" onsubmit="toSubmit(event)">
-    <label class="block" style="width: fit-content">
-        <input class="block url" name="q" type="text" placeholder="键入Github文件链接"
-               pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" required>
-        <div class="bar"></div>
-    </label>
-    <input class="block btn" type="submit" value="下载">
-    <div class="tips"><p>GitHub文件链接带不带协议头都可以，支持release、archive以及文件，右键复制出来的链接都是符合标准的，更多用法、clone加速请参考<a href="https://hunsh.net/archives/23/">这篇文章</a>。</p>
-        <p>release、archive使用cf加速，文件会跳转至JsDelivr</p>
-        <p>注意，不支持项目文件夹</p></div>
-    <div class="example">
-        <p>分支源码：https://github.com/hunshcn/project/archive/master.zip</p>
-        <p>release源码：https://github.com/hunshcn/project/archive/v0.1.0.tar.gz</p>
-        <p>release文件：https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</p>
-        <p>分支文件：https://github.com/hunshcn/project/blob/master/filename</p>
+
+<body>
+    <div class="container">
+        <h1>
+            <svg t="1629783559227" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="2058" width="50" height="50">
+                <path
+                    d="M960 512c0 97.76-28.704 185.216-85.664 263.264-56.96 78.016-130.496 131.84-220.64 161.856-10.304 1.824-18.368 0.448-22.848-4.032a22.4 22.4 0 0 1-7.2-17.504v-122.88c0-37.632-10.304-65.44-30.464-82.912a409.856 409.856 0 0 0 59.616-10.368 222.752 222.752 0 0 0 54.72-22.816c18.848-10.784 34.528-23.36 47.104-38.592 12.544-15.232 22.848-35.904 30.912-61.44 8.096-25.568 12.128-54.688 12.128-87.904 0-47.072-15.232-86.976-46.208-120.16 14.368-35.456 13.024-74.912-4.48-118.848-10.752-3.616-26.432-1.344-47.072 6.272s-38.56 16.16-53.824 25.568l-21.984 13.888c-36.32-10.304-73.536-15.232-112.096-15.232s-75.776 4.928-112.096 15.232a444.48 444.48 0 0 0-24.672-15.68c-10.336-6.272-26.464-13.888-48.896-22.432-21.952-8.96-39.008-11.232-50.24-8.064-17.024 43.936-18.368 83.424-4.032 118.848-30.496 33.632-46.176 73.536-46.176 120.608 0 33.216 4.032 62.336 12.128 87.456 8.032 25.12 18.368 45.76 30.496 61.44 12.544 15.68 28.224 28.704 47.072 39.04 18.848 10.304 37.216 17.92 54.72 22.816a409.6 409.6 0 0 0 59.648 10.368c-15.712 13.856-25.12 34.048-28.704 60.064a99.744 99.744 0 0 1-26.464 8.512 178.208 178.208 0 0 1-33.184 2.688c-13.024 0-25.568-4.032-38.144-12.544-12.544-8.512-23.296-20.64-32.256-36.32a97.472 97.472 0 0 0-28.256-30.496c-11.232-8.064-21.088-12.576-28.704-13.92l-11.648-1.792c-8.096 0-13.92 0.928-17.056 2.688-3.136 1.792-4.032 4.032-2.688 6.72s3.136 5.408 5.376 8.096 4.928 4.928 7.616 7.168l4.032 2.688c8.544 4.032 17.056 11.232 25.568 21.984 8.544 10.752 14.368 20.64 18.4 29.6l5.824 13.44c4.928 14.816 13.44 26.912 25.568 35.872 12.096 8.992 25.088 14.816 39.008 17.504 13.888 2.688 27.36 4.032 40.352 4.032s23.776-0.448 32.288-2.24l13.472-2.24c0 14.784 0 32.288 0.416 52.032 0 19.744 0.48 30.496 0.48 31.392a22.624 22.624 0 0 1-7.648 17.472c-4.928 4.48-12.992 5.824-23.296 4.032-90.144-30.048-163.68-83.84-220.64-161.888C92.256 697.216 64 609.312 64 512c0-81.152 20.192-156.064 60.096-224.672s94.176-122.88 163.232-163.232C355.936 84.192 430.816 64 512 64s156.064 20.192 224.672 60.096 122.88 94.176 163.232 163.232C939.808 355.488 960 430.848 960 512"
+                    fill="#000000" p-id="2059"></path>
+            </svg>
+            <span>Github 文件加速</span>
+        </h1>
     </div>
-</form>
-<p style="position: sticky;top: calc(100% - 2.5em);">项目基于Cloudflare Workers，开源于GitHub <a style="color: #3294ea"
-                                                                                         href="https://github.com/hunshcn/gh-proxy">hunshcn/gh-proxy</a>
-</p>
-</body>
+    <div id="main" class="container">
+        <form action="./" method="GET" target="_blank" onsubmit="if (!window.__cfRLUnblockHandlers) return false; linkDownloadSubmit(event)">
+            <div class="input-group">
+                <input id="link" type="search" class="form-control search-input"
+                    placeholder="支持 Github 的 Release / Archive / Raw 文件，协议头可选"
+                    pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$"
+                    required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">加速下载</button>
+                </div>
+            </div>
+        </form>
+        <div class="alert alert-secondary mt20 tal">
+            <ol>
+                <li>GitHub 链接可选填协议，支持 Release/Archive 及文件。</li>
+                <li>不支持项目文件夹。</li>
+                <li>禁止滥用，此项目为免费支持请合理使用。</li>
+                <li>合法输入如：</li>
+                <ul>
+                    <li>https://github.com/kubernetes/kubernetes/archive/refs/tags/v1.22.1.zip</li>
+                    <li>https://github.com/kubernetes/kubernetes/releases/download/v1.22.1/kubernetes.tar.gz</li>
+                    <li>https://github.com/kubernetes/kubernetes/blob/v1.23.0-alpha.1/LICENSES/LICENSE</li>
+                </ul>
+            </ol>
+        </div>
+        <div>
+            <a href="https://uiisc.org" target="_blank" class="btn btn-outline-secondary">UIISC</a>
+            <a href="https://crogram.org" target="_blank" class="btn btn-outline-secondary">CROGRAM</a>
+        </div>
+    </div>
+    <div id="footer">
+        <span>基于开源项目 <a href="https://github.com/hunshcn/gh-proxy" rel="nofollow" target="_blank">GH-PROXY</a> 驱动支持</span>
+        <span>由 <a href="https://workers.cloudflare.com" rel="nofollow" target="_blank">Cloudflare Workers</a> 提供服务支持</span>
+    </div>
 </html>
